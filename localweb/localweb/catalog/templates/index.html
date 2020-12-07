@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>selo</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      {% load static %}
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+      <!-- fevicon -->
+      <link rel="icon" href="{% static 'images/fevicon.png' %}" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.min.css' %}">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      
+      <script src="{% static 'scripts/echarts.min.js' %}"></script>
+      <script src="{% static 'scripts/china.js' %}"></script>
+      <script src="{% static 'scripts/echarts-wordcloud.min.js' %}"></script>
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   </head>
+   <!-- body -->
+   <body class="main-layout">
+      
+      <!-- end loader -->
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         <div class="header">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                     <div class="full">
+                        <div class="center-desk">
+                           <div class="logo">
+                              <a href=" "><img src="{% static 'images/logo.png' %}" alt="#" /></a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                     <nav class="navigation navbar navbar-expand-md navbar-dark ">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarsExample04">
+                           <ul class="navbar-nav mr-auto">
+                              <li class="nav-item active">
+                                 <a class="nav-link" href=" ">China</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="/world/">World</a>
+                             </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="/key_tech/">Key Tech.</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="/document/">Document</a>
+                              </li>
+                              <li class="nav-item">
+                                 <a class="nav-link" href="/contact/">Contact Us</a>
+                              </li>
+                           </ul>
+                        </div>
+                     </nav>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </header>
+      <!-- end header inner -->
+      <!-- end header -->
+      <!-- banner -->
+      <section class="banner_main">
+         <div id="banner1" class="carousel slide" data-ride="carousel">
+            <!-- <ol class="carousel-indicators">
+               <li data-target="#banner1" data-slide-to="0" class="active"></li>
+               <li data-target="#banner1" data-slide-to="1"></li>
+               <li data-target="#banner1" data-slide-to="2"></li>
+            </ol> -->
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <div class="container">
+                       <div class="carousel-caption">
+                          <div class="row d_flex">
+                            
+                             <div class="col-md-6">
+                                <div class="text_img">
+                                   <div id="tab_2" style="width: 1100px;height:550px;"class="div1"></div>
+                                       <script type="text/javascript">
+                                           // 地图
+                                           var myChart = echarts.init(document.getElementById('tab_2'));
+  
+                                           var days = {{ days_list|safe }};
+  
+                                           var province = {{ province_list|safe }};
+  
+                                           var data = {{ infect_data|safe }};
+  
+                                           option = {
+                                       baseOption: {
+  
+                                           timeline: {
+                                               axisType: 'category',
+                                               // realtime: false,
+                                               loop: false,
+                                               autoPlay: true,
+                                               playInterval: 500,
+                                               symbolSize: 12,
+                                               left: '5%',
+                                               right: '5%',
+                                               bottom: '0%',
+                                               width: '90%',
+                                               // controlStyle: {
+                                               //     position: 'left'
+                                               // },
+                                               data: days,
+                                               lineStyle: {
+                                                     color: '#fff'
+                                                    },
+                                               label:{
+                                                  textStyle: {
+                                                       color: '#fff'
+                                                   }
+  
+                                               },
+                                               controlStyle:{
+                                                  normal : { color : '#fff'}
+                                               },
+                                               tooltip: {
+                                                   formatter: days
+                                               },
+                                           },
+  
+                                           tooltip: {
+                                               show: true,
+                                               formatter: function(params) {
+                                                   console.log(params)
+                                                   return params.name + '：' + params.data['value']
+                                               },
+                                           },
+                                           visualMap: {
+                                               type: 'piecewise',
+                                               pieces: [{
+                                                       min: 3001,
+                                                       color: '#73240D'
+                                                   },
+                                                   {
+                                                       min: 1201,
+                                                       max: 3000,
+                                                       color: '#BB0000'
+                                                   },
+                                                   {
+                                                       min: 901,
+                                                       max: 1200,
+                                                       color: '#BD430A'
+                                                   },
+                                                   {
+                                                       min: 600,
+                                                       max: 901,
+                                                       color: '#E08150'
+                                                   },
+                                                   {
+                                                       min: 301,
+                                                       max: 600,
+                                                       color: '#E9B090'
+                                                   },
+                                                   {
+                                                       min: 1,
+                                                       max: 300,
+                                                       color: '#F2DDD2'
+                                                   },
+                                                   {
+                                                       value: 0,
+                                                       color: 'white'
+                                                   }
+                                               ],
+                                               orient: 'vertical',
+                                               itemWidth: 25,
+                                               itemHeight: 15,
+                                               showLabel: true,
+                                               seriesIndex: [0],
+  
+                                               textStyle: {
+                                                   color: '#7B93A7'
+                                               },
+                                               bottom: '10%',
+                                               left: "5%",
+                                           },
+                                           grid: {
+                                               right: '17%',
+                                               top: '20%',
+                                               bottom: '10%',
+                                               width: '10%'
+                                           },
+                                            textStyle: {
+                                                     color: '#fff'
+                                                    },
+                                           xAxis: {
+                                               min:0,
+                                               max:4000,
+                                               show: false
+                                           },
+                                           yAxis: [{
+                                               inverse: true,
+                                               offset: '2',
+                                               'type': 'category',
+                                               data: '',
+                                               nameTextStyle: {
+                                                   color: '#fff'
+                                               },
+                                               textStyle: {
+                                                     color: '#fff'
+                                                    },
+                                               axisTick: {
+                                                   show: false,
+                                               },
+                                               axisLabel: {
+                                                   //rotate:45,
+                                                   textStyle: {
+                                                       fontSize: 14,
+                                                       color: '#fff',
+                                                   },
+                                                   interval: 0
+                                               },
+                                               axisLine: {
+                                                   show: false,
+                                                   lineStyle: {
+                                                       color: '#333'
+                                                   },
+                                               },
+                                               splitLine: {
+                                                   show: false,
+                                                   lineStyle: {
+                                                       color: '#333'
+                                                   }
+                                               },
+                                           }],
+                                           geo: {
+                                               map: 'china',
+                                               right: '35%',
+                                               left: '15%',
+                                               label: {
+                                                   emphasis: {
+                                                       show: false,
+                                                   }
+                                               },
+                                               itemStyle: {
+                                                   emphasis: {
+                                                       areaColor: '#00FF00'
+                                                   }
+                                               }
+                                           },
+                                           series: [{
+                                                   name: 'mapSer',
+                                                   type: 'map',
+                                                   map: 'china',
+                                                   roam: false,
+                                                   geoIndex: 0,
+                                                   label: {
+                                                       show: false,
+                                                   },
+                                               },
+                                               {
+                                                   'name': '',
+                                                   'type': 'bar',
+                                                   zlevel: 2,
+                                                   barWidth: '40%',
+                                                   label: {
+                                                       normal: {
+                                                           show: true,
+                                                           color:'#fff',
+                                                           fontSize: 14,
+                                                           position: 'right',
+                                                           formatter: '{c}'
+                                                       }
+                                                   },
+                                               }
+                                           ],
+  
+                                       },
+                                       animationDurationUpdate: 3000,
+                                       animationEasingUpdate: 'quinticInOut',
+                                       options: []
+                                           };
+                                        for (var n = 0; n < days.length; n++) {
+  
+                                       var res = [];
+                                       for (j = 0; j < data[n].length; j++) {
+                                           res.push({
+                                               name: province[j],
+                                               value: data[n][j]
+                                           });
+                                       }
+                                       res.sort(function(a, b) {
+                                           return b.value - a.value;
+                                       }).slice(0, 6);
+  
+                                       res.sort(function(a, b) {
+                                           return a.value - b.value;
+                                       });
+                                       var res1 = [];
+                                       var res2 = [];
+                                       for (t = 0; t < 10; t++) {
+                                           res1[t] = res[res.length - 1 - t].name;
+                                           res2[t] = res[res.length - 1 - t].value;
+                                       }
+                                       console.log(res1);
+                                       console.log("----------------");
+                                       console.log(province);
+                                       console.log("----------------");
+                                       console.log(data);
+                                       option.options.push({
+                                           title: [{
+                                                   text: days[n] + ' COVID-19 number of confirmed infection in China',
+                                                   textStyle: {
+                                                       color: '#fff',
+                                                       fontSize: 28
+                                                   },
+                                                   left:20,
+                                                   top:0,
+                                                   bottom: '30%'
+                                               },
+                                               {
+                                                   show: true,
+                                                   text: 'Top 10 infected provinces: ',
+                                                   textStyle: {
+                                                       color: '#fff',
+                                                       fontSize: 18
+                                                   },
+                                                   right: '10%',
+                                                   top: '15%'
+                                               }
+                                           ],
+                                           yAxis: {
+                                               data: res1,
+                                           },
+                                           series: [{
+                                               type: 'map',
+                                               data: res
+                                           }, {
+                                               type: 'bar',
+                                               data: res2,
+                                               right: '10%',
+                                               itemStyle: {
+                                                   normal: {
+                                                       color: function(params) {
+                                                           // build a color map as your need.
+                                                           var colorList = [{
+                                                                   colorStops: [{
+                                                                       offset: 0,
+                                                                       color: '#FF0000' // 0% 处的颜色
+                                                                   }, {
+                                                                       offset: 1,
+                                                                       color: '#990000' // 100% 处的颜色
+                                                                   }]
+                                                               },
+                                                               {
+                                                                   colorStops: [{
+                                                                       offset: 0,
+                                                                       color: '#00C0FA' // 0% 处的颜色
+                                                                   }, {
+                                                                       offset: 1,
+                                                                       color: '#2F95FA' // 100% 处的颜色
+                                                                   }]
+                                                               }
+                                                           ];
+                                                           if (params.dataIndex < 3) {
+                                                               return colorList[0]
+                                                           } else {
+                                                               return colorList[1]
+                                                           }
+                                                       },
+                                                   }
+                                               },
+                                           }]
+                                       });
+                                         }
+  
+                                       myChart.setOption(option);
+                                       </script>
+                                   </div>
+                                </div>
+                             </div>
+                          </div>
+                       </div>
+                    </div>
+               <div class="carousel-item ">
+                  <div class="container">
+                     <div class="carousel-caption">
+                        <div class="row d_flex">
+                            <div class="col-md-6">
+                                <div class="text-bg">
+                                  <div id="tab_1" style="width: 500px;height:350px;" class="div1"></div>  
+                                     <script type="text/javascript">
+                                              // 这个是折线图
+                                            var myChart = echarts.init(document.getElementById('tab_1'));
+                                            var days = {{ days_list|safe }}
+                                            var confirmed = {{ overall_confirmed|safe }}
+                                            var death = {{ overall_death|safe }}
+  
+                                          option = {
+                                                title:{
+                                                  text: 'COVID-19 cumulative confirmed & death in China',
+                                                  textStyle: {
+                                                           color: '#fff',
+                                                           fontSize: 18
+                                                       },
+                                                       left:20,
+                                                       top:'10%'                                                 
+                                             },
+                                                tooltip: {
+                                                    trigger: 'axis',
+                                                },
+                                                legend: {
+                                                    data: ['Confirmed','Death',],
+                                                    textStyle: {
+                                                        color: '#fff'
+                                                    },
+                                                    top:'20%',
+                                                },
+                                                grid:{
+                                                   left: '3%',
+                                                   right: '3%',
+                                                   bottom: '10%',
+                                                   top: '30%',
+                                                  containLabel: true,
+                                                },
+                                                xAxis: {
+                                                    data: days,
+                                                    axisLine: {
+                                                        lineStyle: {
+                                                            color: '#fff'
+                                                        }
+                                                    },
+                                                    axisTick:{
+                                                        show:false,
+                                                    },
+                                                },
+                                                yAxis: [{
+                                                    name: 'Confirmed',
+                                                    splitNumber: 5,
+                                                    axisLine: {
+                                                        lineStyle: {
+                                                            color: '#fff',
+                                                        }
+                                                    },
+                                                    
+                                                    axisLabel:{
+                                                        formatter:'{value} ',
+                                                    }
+                                                },
+                                                    {
+                                                    name: 'Death',
+                                                    splitNumber: 5,
+                                                    axisLine: {
+                                                        lineStyle: {
+                                                            color: '#fff',
+                                                        }
+                                                    },
+                                                    axisLabel:{
+                                                        formatter:'{value} ',
+                                                    }
+                                                }],
+                                                
+                                                series: [{
+                                                    name: 'Confirmed',
+                                                    type: 'line',
+                                                    yAxisIndex: 0,
+                                                    itemStyle: {
+                                                            normal: {
+                                                            color:'yellow'},
+                                                    },
+                                                    data: confirmed,
+                                                }, 
+                                                
+  
+                                                {
+                                                    yAxisIndex: 1,
+                                                    name: 'Death',
+                                                    type: 'line',
+                                                    data: death,
+                                                }, 
+                                               ]
+                                            };
+  
+                                              myChart.setOption(option);
+                                    </script>
+                                </div>
+                             </div>
+                             <div class="col-md-6">
+                                <div class="text-bg">
+                                  <div id="tab_7" style="width: 500px;height:350px;" class="div1"></div>  
+                                     <script type="text/javascript">
+                                              // 这个是折线图
+                                            var myChart = echarts.init(document.getElementById('tab_7'));
+                                            var days = {{ post_days|safe }};
+                                            var raw_cnt = {{ post_cnt|safe }};
+                                            var active = {{ overall_active|safe }};
+                                            active = active.slice(19,);
+
+                                            // var splitNumber = 5;
+
+                                            // var min_raw = Math.min(...raw_cnt);
+                                            // var max_raw = Math.max(...raw_cnt);
+                                            // max_raw = parseInt(max_raw/splitNumber) * splitNumber + (max_raw%splitNumber == 0 ? 0 : splitNumber );
+                                            // var interval_raw = max_raw / splitNumber;
+
+                                            // var min_clean = Math.min(...clean_cnt);
+                                            // var max_clean = Math.max(...clean_cnt);
+                                            // max_clean = parseInt(max_clean/splitNumber) * splitNumber + (max_clean%splitNumber == 0 ? 0 : splitNumber );
+                                            // var interval_clean = max_clean / splitNumber;
+  
+                                          option = {
+                                                title:{
+                                                  text: 'Posts and active confirmed cases in each day',
+                                                  textStyle: {
+                                                           color: '#fff',
+                                                           fontSize: 18
+                                                       },
+                                                       left:20,
+                                                       top:'10%'                                                 
+                                             },
+                                                tooltip: {
+                                                    trigger: 'axis',
+                                                },
+                                                legend: {
+                                                    data: ['Posts', 'Confirmed'],
+                                                    textStyle: {
+                                                        color: '#fff'
+                                                    },
+                                                    top:'20%',
+                                                },
+                                                grid:{
+                                                   left: '3%',
+                                                   right: '3%',
+                                                   bottom: '10%',
+                                                   top: '30%',
+                                                  containLabel: true,
+                                                },
+                                                xAxis: {
+                                                    data: days,
+                                                    axisLine: {
+                                                        lineStyle: {
+                                                            color: '#fff'
+                                                        }
+                                                    },
+                                                    axisTick:{
+                                                        show:false,
+                                                    },
+                                                },
+                                                yAxis: [{
+                                                    name: 'Posts',
+                                                    type: 'value',
+                                                    splitNumber: 5,
+                                                    interval: 5000,
+                                                    axisLine: {
+                                                        lineStyle: {
+                                                            color: '#fff',
+                                                        }
+                                                    },
+                                                    
+                                                    axisLabel:{
+                                                        formatter:'{value} ',
+                                                }
+                                            },
+                                                    {
+                                                    name: 'Confirmed',
+                                                    splitNumber: 5, 
+                                                    interval: 12000,
+                                                    axisLine: {
+                                                        lineStyle: {
+                                                            color: '#fff',
+                                                        }
+                                                    },
+                                                    axisLabel:{
+                                                        formatter:'{value} ',
+                                                    }
+                                                }],
+                                                
+                                                series: [{
+                                                    name: 'Posts',
+                                                    type: 'line',
+                                                    yAxisIndex: 0,
+                                                    itemStyle: {
+                                                            normal: {
+                                                            color:'yellow'},
+                                                    },
+                                                    data: raw_cnt,
+                                                }, 
+                                                
+  
+                                                {
+                                                    yAxisIndex: 1,
+                                                    name: 'Confirmed',
+                                                    type: 'line',
+                                                    data: active,
+                                                }, 
+                                               ]
+                                            };
+  
+                                              myChart.setOption(option);
+                                    </script>
+                                </div>
+                             </div>
+                           <div class="col-md-6">
+                            <div class="text-bg">
+                              <div id="tab_6" style="width: 500px;height:350px;" class="div1"></div>  
+                                 <script type="text/javascript">
+                                          // 这个是折线图
+                                        var myChart = echarts.init(document.getElementById('tab_6'));
+                                        var days = {{ post_days|safe }};
+                                        var confirmed = {{ overall_confirmed|safe }};
+                                        confirmed = confirmed.slice(19, );
+                                        var pos_cnt = {{ pos_cnt|safe }};
+                                        var neu_cnt = {{ neu_cnt|safe }};
+                                        var neg_cnt = {{ neg_cnt|safe }};
+
+                                      option = {
+                                            title:{
+                                              text: 'Sentiment counts & total confirmed cases in China',
+                                              textStyle: {
+                                                       color: '#fff',
+                                                       fontSize: 18
+                                                   },
+                                                   left:20,
+                                                   top:'10%'                                                 
+                                         },
+                                            tooltip: {
+                                                trigger: 'axis',
+                                            },
+                                            legend: {
+                                                data: ['Positive','Neutral', 'Negative', 'Confirmed'],
+                                                textStyle: {
+                                                    fontSize: 12,
+                                                    color: '#fff'
+                                                },
+                                                bottom:'0%',
+                                                left: '10%',
+                                            },
+                                            grid:{
+                                                left: '3%',
+                                                right: '3%',
+                                                bottom: '10%',
+                                                top: '30%',
+                                              containLabel: true,
+                                            },
+                                            xAxis: {
+                                                data: days,
+                                                axisLine: {
+                                                    lineStyle: {
+                                                        color: '#fff'
+                                                    }
+                                                },
+                                                axisTick:{
+                                                    show:false,
+                                                },
+                                            },
+                                            yAxis: [{
+                                                name: 'Sentiment',
+                                                interval: 800,
+                                                axisLine: {
+                                                    lineStyle: {
+                                                        color: '#fff',
+                                                    }
+                                                },
+                                                axisLabel:{
+                                                    formatter:'{value} ',
+                                                }
+                                            },
+                                            {
+                                                name: 'Confirmed',
+                                                axisLine: {
+                                                    lineStyle: {
+                                                        color: '#fff',
+                                                    }
+                                                },
+                                                axisLabel:{
+                                                    formatter:'{value} ',
+                                                }
+                                            }
+                                        
+                                        ],
+                                            
+                                            series: [{
+                                                name: 'Positive',
+                                                type: 'line',
+                                                yAxisIndex: 0,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'#d32626'},
+                                                },
+                                                data: pos_cnt,
+                                            }, 
+                                            {
+                                                name: 'Neutral',
+                                                type: 'line',
+                                                yAxisIndex: 0,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'#79d70f'},
+                                                },
+                                                data: neu_cnt,
+                                            }, 
+                                            {
+                                                name: 'Negative',
+                                                type: 'line',
+                                                yAxisIndex: 0,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'#5fdde5'},
+                                                },
+                                                data: neg_cnt,
+                                            }, 
+                                            {
+                                                name: 'Confirmed',
+                                                type: 'line',
+                                                yAxisIndex: 1,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'yellow'},
+                                                },
+                                                data: confirmed,
+                                            },
+                                           ]
+                                        };
+
+                                          myChart.setOption(option);
+                                </script>
+                            </div>
+                         </div>
+                         <div class="col-md-6">
+                            <div class="text-bg">
+                              <div id="tab_8" style="width: 500px;height:350px;" class="div1"></div>  
+                                 <script type="text/javascript">
+                                          // 这个是折线图
+                                        var myChart = echarts.init(document.getElementById('tab_8'));
+                                        var days = {{ post_days|safe }};
+                                        var confirmed = {{ world_confirmed|safe }};
+                                        var pos_cnt = {{ pos_cnt|safe }};
+                                        var neu_cnt = {{ neu_cnt|safe }};
+                                        var neg_cnt = {{ neg_cnt|safe }};
+
+                                      option = {
+                                            title:{
+                                              text: 'Sentiment counts & total confirmed cases in world',
+                                              textStyle: {
+                                                       color: '#fff',
+                                                       fontSize: 18
+                                                   },
+                                                   left:20,
+                                                   top:'10%'                                                 
+                                         },
+                                            tooltip: {
+                                                trigger: 'axis',
+                                            },
+                                            legend: {
+                                                data: ['Positive','Neutral', 'Negative', 'Confirmed'],
+                                                textStyle: {
+                                                    fontSize: 12,
+                                                    color: '#fff'
+                                                },
+                                                bottom: '0%',
+                                                left: '10%',
+                                            },
+                                            grid:{
+                                                left: '3%',
+                                                right: '3%',
+                                                bottom: '10%',
+                                                top: '30%',
+                                              containLabel: true,
+                                            },
+                                            xAxis: {
+                                                data: days,
+                                                axisLine: {
+                                                    lineStyle: {
+                                                        color: '#fff'
+                                                    }
+                                                },
+                                                axisTick:{
+                                                    show:false,
+                                                },
+                                            },
+                                            yAxis: [{
+                                                name: 'Sentiment',
+                                                interval: 800,
+                                                axisLine: {
+                                                    lineStyle: {
+                                                        color: '#fff',
+                                                    }
+                                                },
+                                                axisLabel:{
+                                                    formatter:'{value} ',
+                                                }
+                                            },
+                                            {
+                                                name: 'Confirmed',
+                                                interval: 700000,
+                                                axisLine: {
+                                                    lineStyle: {
+                                                        color: '#fff',
+                                                    }
+                                                },
+                                                axisLabel:{
+                                                    formatter:'{value} ',
+                                                }
+                                            }
+                                        
+                                        ],
+                                            
+                                            series: [{
+                                                name: 'Positive',
+                                                type: 'line',
+                                                yAxisIndex: 0,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'#d32626'},
+                                                },
+                                                data: pos_cnt,
+                                            }, 
+                                            {
+                                                name: 'Neutral',
+                                                type: 'line',
+                                                yAxisIndex: 0,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'#79d70f'},
+                                                },
+                                                data: neu_cnt,
+                                            }, 
+                                            {
+                                                name: 'Negative',
+                                                type: 'line',
+                                                yAxisIndex: 0,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'#5fdde5'},
+                                                },
+                                                data: neg_cnt,
+                                            }, 
+                                            {
+                                                name: 'Confirmed',
+                                                type: 'line',
+                                                yAxisIndex: 1,
+                                                itemStyle: {
+                                                        normal: {
+                                                        color:'yellow'},
+                                                },
+                                                data: confirmed,
+                                            },
+                                           ]
+                                        };
+
+                                          myChart.setOption(option);
+                                </script>
+                            </div>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+               
+              
+
+               <div class="carousel-item">
+                  <div class="container">
+                     <div class="carousel-caption">
+                        <div class="row d_flex">
+                        
+                              
+                           
+                           <div class="col-md-6">
+                              <div class="text_img">
+                                 <div id="tab_3" style="width: 1100px;height:550px;"class="div1"></div>
+                                      <script type="text/javascript">
+                                         // 词云
+                                         var myChart = echarts.init(document.getElementById('tab_3'));
+                                         var word_cloud_kws = {{ word_cloud_kws|safe }};
+                                         var word_cloud_weights = {{ word_cloud_weights|safe }};
+                                         var word_cloud = [];
+                                         for (var i = 0; i < word_cloud_kws.length; i++)
+                                         {
+                                            word = {
+                                                word_trans: word_cloud_weights[i][2],
+                                                name: word_cloud_kws[i],
+                                                value: word_cloud_weights[i][0],
+                                                tipData: word_cloud_weights[i][1],
+                                            }
+                                            word_cloud.push(word)
+                                         }
+
+                                         function tooltipCharts() {
+                                          console.log(arguments[0]);
+                                          var myChart1 = echarts.init(document.getElementById('tooltipBarId'));
+                                         
+                                          var option = {
+                                              xAxis: {
+                                             name: 'Period',
+                                             type: 'category',
+                                             data: ['01/22', '02/18', '03/11', '04/07', '04/30']
+                                             //虚浮图表的横坐标，我只设置了七天，这里要改的话下面传参的地方要一起改
+                                          },
+                                          yAxis: {
+                                             name: 'percentage',
+                                             type: 'value'
+                                          },
+                                          series: [{
+                                             data: newdata,
+                                             type: 'line'
+                                          }]
+                                          };
+                                          myChart1.setOption(option);
+                                           }
+
+
+                                            option = {
+                                              title: {
+
+                                              },
+                                              grid: {
+                                               left: '5%',
+                                               right: '5%',
+                                               bottom: '5%',
+                                               top: '5%',
+                                               containLabel: true
+                                           },
+                                              tooltip: {
+                                                 enterable: true,
+                                                 transitionDuration: 1,
+                                                 textStyle: {
+                                                     color: '#000',
+                                                     decoration: 'none',
+                                                 },
+                                                 formatter: function(params) {
+                                                     console.log(params)
+                                                     var tipHtml = '';
+                                                     tipHtml =  '<div style="height:260px;width:550px;border-radius:5px;background:#fff;box-shadow:0 0 10px 5px #aaa">' +
+                                                         '    <div style="height:50px;width:100%;border-radius:5px;background:#F8F9F9;border-bottom:1px solid #F0F0F0">' +
+                                                         '        <span style="line-height:50px;margin-left:18px">' + params.name + '(' + params.data.word_trans + ')' + '</span>' +
+                                                         '    </div>' +
+                                                         '    <div id="tooltipBarId" style="height:200px;width:100%;border-radius:0 0 5px 0;background:#fff"></div>' +
+                                                         '</div>';
+                                                     setTimeout(function() {
+                                                         tooltipCharts(params.name);
+                                                     }, 10);
+                                                     newdata=[params.data.tipData[0],params.data.tipData[1],params.data.tipData[2],params.data.tipData[3],params.data.tipData[4]];
+                                                     return tipHtml;
+                                                 }
+                                             },
+                                             
+                                          series: [{
+                                             type: 'wordCloud',
+                                             gridSize: 30,
+                                             sizeRange: [30, 70],
+                                             rotationRange: [0, 0],
+                                             shape: 'circle',
+                                             textStyle: {
+                                                 normal: {
+                                                     color: function() {
+                                                         return 'rgb(' + [
+                                                             // make color into bright area
+                                                             Math.round((Math.random() * 0.4 + 0.6) * 255),
+                                                             Math.round((Math.random() * 0.4 + 0.6) * 255),
+                                                             Math.round((Math.random() * 0.4 + 0.6) * 255)
+                                                         ].join(',') + ')';
+                                                     }
+                                                 },
+                                                 emphasis: {
+                                                     shadowBlur: 10,
+                                                     shadowColor: '#333'
+
+                                                 }
+                                             },
+                                             data: word_cloud
+                                            //  [{//这里是显示词汇的，他好像要固定写好
+                                            //      name: '疫苗研制',
+                                            //      tipData: [1,2,3,4,5,6,7],
+                                            //      value: 7000,
+                                            //      textStyle: {
+                                            //          normal: {
+                                            //              color: 'yellow'
+                                            //          },
+                                            //          emphasis: {
+                                            //              color: 'red'
+                                            //          }
+                                            //      }
+                                            //  },  {
+                                            //      name: '小汤山',
+                                            //      value: 465,
+                                            //      tipData: [1,2,5,4,5,5,7]
+                                            //  },  {
+                                            //      name: '口罩',
+                                            //      value: 5234,
+                                            //      tipData: [1,2,5,4,5,5,7]
+                                            //  },  {
+                                            //      name: '红十字',
+                                            //      value: 2333,
+                                            //      tipData: [1,2,5,4,5,5,7]
+                                            //  },  {
+                                            //      name: '疫情',
+                                            //      value: 1230,
+                                            //      tipData: [1,2,5,4,5,5,7]
+                                            //  }
+                                            //  ]
+                                          }]
+                                         };
+
+
+
+                                      myChart.setOption(option);
+                                    </script>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+                </div>
+
+            </div>
+            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev" style="width: 100px;">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            </a>
+            <a class="carousel-control-next" href="#banner1" role="button" data-slide="next" style="width: 100px;">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </a>
+         </div>
+      </section>
+
+      <!-- <footer> -->
+         <!-- <div class="footer">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                     <img class="logo1" src="{% static 'images/logo1.png' %}" alt="#"/>
+                     <ul class="about_us">
+                        <li>dolor sit amet, consectetur<br> magna aliqua. Ut enim ad <br>minim veniam, <br> quisdotempor incididunt r</li>
+                     </ul>
+                     <ul class="social_icon">
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                     </ul>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                     <h3>Useful Link</h3>
+                     <ul class="link_menu">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">About services</a></li>
+                        <li><a href="#">About Departments</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                     <h3>The Services</h3>
+                     <ul class="link_menu">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">About services</a></li>
+                        <li><a href="#">About Departments</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+                     <h3>Contact Us</h3>
+                     <ul class="link_menu">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">About services</a></li>
+                        <li><a href="#">About Departments</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                     </ul>
+                  </div>
+                  <div class="col-md-8 offset-md-4 ">
+                     <form class="bottom_form">
+                        <h3>Newsletter</h3>
+                        <input class="enter" placeholder="Enter your email" type="text" name="Enter your email">
+                        <button class="sub_btn">subscribe</button>
+                     </form>
+                  </div>
+               </div>
+            </div>
+            <div class="copyright">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-md-10 offset-md-1">
+                      
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </footer> -->
+      <!-- end footer -->
+      <!-- Javascript files-->
+      <script src="{% static 'scripts/jquery.min.js' %}"></script>
+      <script src="{% static 'scripts/popper.min.js' %}"></script>
+      <script src="{% static 'scripts/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'scripts/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'scripts/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+      <script src="{% static 'scripts/custom.js' %}"></script>
+   </body>
+</html>
+

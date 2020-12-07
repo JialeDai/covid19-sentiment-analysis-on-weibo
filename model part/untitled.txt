@@ -1,0 +1,49 @@
+:folded_hands: 是否应该把单词和标点也分割开来？
+
+是否可以向LIWC中文字典中，自己加入一写单词？
+
+月，日，年精确到数字就无法识别成是时间了。。
+
+------------------------------------------------------------------------------------------------------------
+put the LIWC chinese dict. to the segementation tool
+
+1. basic methods: bay of words to train the model -> accuracy
+2. use LIWC result to train the model
+3. basic methods + LIWC
+
+reduce dimension -> cumlative weights
+
+
+Word stems are partial words terminated by an asterisk (*). Use of an asterisk at the end of the word or word stem signals LIWC2015 to ignore all subsequent letters. Consequently, “I’*” will count the words I’m, I’ll, I’d, I’ve and so forth in categories 1 and 7 ????
+
+
+Pos, Neu, Neg 比例不平衡
+
+how to do the normalization in LIWC result? -> Z normalization! 
+
+----------------------------------------------------------------------------------------------------------
+1. use MSE to evaluate the regression
+2. use SVM two kernal (Linear, RBF), and do the grid search to get best parameter, and see the accuracy.
+3. 
+
+'ovr': This approach is commonly used for algorithms that naturally predict numerical class membership probability or score, such as
+'ovo': Classically, this approach is suggested for support vector machines (SVM) and related kernel-based algorithms. This is believed because the performance of kernel methods does not scale in proportion to the size of the training dataset and using subsets of the training data may counter this effect.
+
+----------------------------------------------------------------------------------------------------------
+1. 10 folds CV for testing after finding the best params. in SVM
+2. PCA reducation for tfidf features, plot the figure for different dimensions
+3. best PCA reducation tfidf + LIWC for trainning
+
+----------------------------------------------------------------------------------------------------------
+menu bar: china key technology(data 哪里来的，model，performance，frontend), documents(报告，ppt demo)，team 介绍
+index: china map -> word cloud -> SE
+
+
+
+
+
+
+
+
+
+
