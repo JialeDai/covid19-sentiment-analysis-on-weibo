@@ -1,7 +1,8 @@
 
 # covid19-sentiment-analysis-on-weibo
 Contriubutor: JialeDai, Song Zhang, Zijing Sun, Bailu Zhang, ZeChang Fang \
-Instructor: Houwei Cao
+Instructor: Houwei Cao \
+Website link: https://limitless-harbor-77448.herokuapp.com/
 ## Introduction
 Data analysis is now a very common technique for people to get conclusion from large amount of information. People in western countries have already had a lot of study on how to use data to analysis sentiment and get conclusion from those data. We have done our research and find several references. Considering the outbreak in China is the most representative, since it has the entire increasing and decreasing period which is helpful for us to figure out the disease and people’s attitude change as the pandemic develops. So, we want to collect the user post on the social media and train a classifier to decide whether a certain a user post is positive or negative. We can use the model we train to analysis the sentiment on social media during the period of the disease outbreak. The model we trained can be used to classify all the post in our data set and the result will be presented as curves shown on our website. A well-designed web page can help people get the needed information conveniently. We plan to make an interactive map to show the how the infection changes the provinces in China and the countries all around the world.
 ## Project Methodologies
